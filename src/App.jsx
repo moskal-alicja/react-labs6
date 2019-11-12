@@ -1,7 +1,11 @@
 import React from 'react'
+import ListEmployees from './ListEmployees'
 
 const App = () => (
-  <h1>Minimal React</h1>  
+  <div>
+    <h1>Minimal React</h1> 
+    <ListEmployees /> 
+  </div>
 )
 
 export default App

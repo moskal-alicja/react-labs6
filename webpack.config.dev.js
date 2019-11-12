@@ -47,7 +47,7 @@ module.exports = merge(base, {
   ],
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
-    port: 3000,
+    port: 3001,
     hot: true,
     stats: 'minimal',
   },
