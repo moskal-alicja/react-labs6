@@ -36,6 +36,9 @@ class ListEmployees extends React.Component {
     newUserForm() {
         this.setState({isAddNewUser: true});
     }
+
+    addNewUser() {
+    }
     
     render() {
         const { hits, isLoading, isAddNewUser } = this.state;
@@ -51,15 +54,17 @@ class ListEmployees extends React.Component {
                             <th>Age</th>
                             <th>Company</th>
                             <th>Email</th>
+                            <th>IsActive</th>
                         </tr>
                     </thead>
                     <tbody>
                         {hits.map(hit =>
-                        <tr key={hit._id}>
+                        <tr key={hit.id}>
                             <td>{hit.name}</td>
                             <td>{hit.age}</td>
                             <td>{hit.company}</td>
                             <td>{hit.email}</td>
+                            <td>{hit.isActive.toString()}</td>
                         </tr>)}
                     </tbody>                               
                 </table>

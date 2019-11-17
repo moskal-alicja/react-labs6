@@ -4,7 +4,6 @@ class NewEmployeeForm extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        _id: "",
         isActive: true,
         age: 0,
         name: "",
@@ -15,6 +14,7 @@ class NewEmployeeForm extends React.Component {
       this.handleChange = this.handleChange.bind(this);
       this.addNewUser = this.addNewUser.bind(this);
       this.activeness = this.activeness.bind(this);
+      this.addNewUser = this.addNewUser.bind(this);
     }
 
     handleChange(event) {
@@ -26,6 +26,22 @@ class NewEmployeeForm extends React.Component {
 
     addNewUser() {
         this.setState({isSaving: true});
+
+        const {isActive, age, name, company, email} = this.state;
+
+        fetch('http://localhost:3000/employees', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                isActive: isActive,
+                age: age,
+                name: name,
+                company: company,
+                email: email
+              })
+        }).then(() => this.props.handleReloadData());
     }
 
     activeness(event, val) {
@@ -35,7 +51,7 @@ class NewEmployeeForm extends React.Component {
     render() { 
         const { isSaving } = this.state;
         if (isSaving) {
-          return <p>Saving ...</p>;
+          return <p>Saving...</p>;
         }
         return (
             <div>
@@ -56,7 +72,7 @@ class NewEmployeeForm extends React.Component {
                     Active:<input type="radio" value="true" checked={this.state.isActive} onChange={(e)=>this.activeness(e, true)}/>
                     Inactive:<input type="radio" value="false" checked={!this.state.isActive} onChange={(e)=>this.activeness(e, false)}/>
                 </div>           
-            <button onClick={this.props.handleReloadData}>Submit</button>
+            <button onClick={this.addNewUser}>Submit</button>
             <button onClick={this.props.cancel}>Cancel</button>
         </div>          
         );
