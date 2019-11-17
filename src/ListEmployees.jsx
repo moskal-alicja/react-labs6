@@ -8,10 +8,12 @@ class ListEmployees extends React.Component {
         hits: [],
         isLoading: false,
         isAddNewUser: false,
+        idDeleting: "",
       };
       this.handleReloadData = this.handleReloadData.bind(this);
       this.cancelAddUser = this.cancelAddUser.bind(this);
       this.newUserForm = this.newUserForm.bind(this);
+      this.deleteEmployee = this.deleteEmployee.bind(this);
     }
 
     componentDidMount() {
@@ -37,11 +39,22 @@ class ListEmployees extends React.Component {
         this.setState({isAddNewUser: true});
     }
 
-    addNewUser() {
+    deleteEmployee(id) {
+        this.setState({idDeleting: id});
+
+        fetch(`http://localhost:3000/employees/${id}`, {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({id: id})
+        })
+        .then(response => response.json())
+        .then(() => this.handleReloadData());
     }
     
     render() {
-        const { hits, isLoading, isAddNewUser } = this.state;
+        const { hits, isLoading, isAddNewUser, idDeleting } = this.state;
         if (isLoading) {
           return <p>Loading ...</p>;
         }
@@ -58,14 +71,15 @@ class ListEmployees extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {hits.map(hit =>
-                        <tr key={hit.id}>
-                            <td>{hit.name}</td>
-                            <td>{hit.age}</td>
-                            <td>{hit.company}</td>
-                            <td>{hit.email}</td>
-                            <td>{hit.isActive.toString()}</td>
-                        </tr>)}
+                        {hits.map(hit =>                                        
+                            <tr key={hit.id}>
+                                <td>{hit.name}</td>
+                                <td>{hit.age}</td>
+                                <td>{hit.company}</td>
+                                <td>{hit.email}</td>
+                                <td>{hit.isActive.toString()}</td>
+                                <td><button onClick={() => this.deleteEmployee(hit.id)}>Delete</button></td>
+                            </tr>)}
                     </tbody>                               
                 </table>
                 {!isAddNewUser &&  
