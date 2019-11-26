@@ -1,5 +1,4 @@
 import React from 'react'
-import NewEmployeeForm from './NewEmployeeForm';
 
 class ListEmployees extends React.Component {
     constructor(props) {
@@ -82,10 +81,7 @@ class ListEmployees extends React.Component {
                             </tr>)}
                     </tbody>                               
                 </table>
-                {!isAddNewUser &&  
-                    <button onClick={this.newUserForm}>Add employee</button> } 
-                {isAddNewUser &&  
-                    <NewEmployeeForm handleReloadData={this.handleReloadData} cancel={this.cancelAddUser}/>}
+                <button onClick={this.newUserForm}>Add employee</button>
             </div>   
         );
     }

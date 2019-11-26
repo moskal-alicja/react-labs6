@@ -11,6 +11,7 @@ module.exports = merge(base, {
     filename: 'static/js/main.js',
     chunkFilename: 'static/js/[name].chunk.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -50,5 +51,6 @@ module.exports = merge(base, {
     port: 3001,
     hot: true,
     stats: 'minimal',
+    historyApiFallback: true,
   },
 })

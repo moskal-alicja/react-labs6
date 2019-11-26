@@ -14,7 +14,6 @@ class NewEmployeeForm extends React.Component {
       this.handleChange = this.handleChange.bind(this);
       this.addNewUser = this.addNewUser.bind(this);
       this.activeness = this.activeness.bind(this);
-      this.addNewUser = this.addNewUser.bind(this);
     }
 
     handleChange(event) {
@@ -54,27 +53,31 @@ class NewEmployeeForm extends React.Component {
           return <p>Saving...</p>;
         }
         return (
-            <div>
-                <p>New Employee: </p>
-                <div>
+            <form onSubmit={this.addNewUser}>
+                <h3>New Employee: </h3>
+                <label>
                     Name: <input type="text" name="name" onChange={this.handleChange} />
-                </div>
-                <div>
+                </label>
+                <br />
+                <label>
                     Age: <input type="number" name="age" onChange={this.handleChange} />
-                </div>
-                <div>
+                </label>
+                <br />
+                <label>
                     Company: <input type="text" name="company" onChange={this.handleChange} />
-                </div>
-                <div>
+                </label>
+                <br/>
+                <label>
                     Email: <input type="text" name="email" onChange={this.handleChange} />
-                </div>
-                <div>
+                </label>
+                <br/>
+                <label>
                     Active:<input type="radio" value="true" checked={this.state.isActive} onChange={(e)=>this.activeness(e, true)}/>
                     Inactive:<input type="radio" value="false" checked={!this.state.isActive} onChange={(e)=>this.activeness(e, false)}/>
-                </div>           
-            <button onClick={this.addNewUser}>Submit</button>
-            <button onClick={this.props.cancel}>Cancel</button>
-        </div>          
+                </label> 
+                <br/> 
+            <input type="submit" value="Submit" />            
+        </form>          
         );
     }
 }
