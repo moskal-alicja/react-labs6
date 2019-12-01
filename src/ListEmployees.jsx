@@ -8,10 +8,9 @@ class ListEmployees extends React.Component {
         isLoading: false,
         isAddNewUser: false,
         idDeleting: "",
+        redirect: false,
       };
       this.handleReloadData = this.handleReloadData.bind(this);
-      this.cancelAddUser = this.cancelAddUser.bind(this);
-      this.newUserForm = this.newUserForm.bind(this);
       this.deleteEmployee = this.deleteEmployee.bind(this);
     }
 
@@ -29,13 +28,6 @@ class ListEmployees extends React.Component {
       fetch('http://localhost:3000/employees')
         .then(response => response.json())
         .then(data => this.setState({ hits: data, isLoading: false }));
-    }
-
-    cancelAddUser() {
-        this.setState({isAddNewUser: false});
-    }
-    newUserForm() {
-        this.setState({isAddNewUser: true});
     }
 
     deleteEmployee(id) {
@@ -56,6 +48,9 @@ class ListEmployees extends React.Component {
         const { hits, isLoading, isAddNewUser, idDeleting } = this.state;
         if (isLoading) {
           return <p>Loading ...</p>;
+        }
+        if(isAddNewUser) {
+            return <Link type="button" to="/new">New</Link>;
         }
         return (
             <div>
@@ -81,7 +76,6 @@ class ListEmployees extends React.Component {
                             </tr>)}
                     </tbody>                               
                 </table>
-                <button onClick={this.newUserForm}>Add employee</button>
             </div>   
         );
     }

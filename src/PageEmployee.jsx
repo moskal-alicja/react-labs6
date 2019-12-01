@@ -1,5 +1,6 @@
 import React from 'react'
 import NewEmployeeForm from './NewEmployeeForm'
+import {Link} from 'react-router-dom'
 
 class PageEmployee extends React.Component {
     constructor(props) {
@@ -9,7 +10,10 @@ class PageEmployee extends React.Component {
 
     render(){
         return(
-            <NewEmployeeForm/>
+            <div>
+                <NewEmployeeForm/>
+                <Link to="/">Back to list</Link>
+            </div>
         );
     }
 }
