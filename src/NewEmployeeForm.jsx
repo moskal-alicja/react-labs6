@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 
 class NewEmployeeForm extends React.Component {
     constructor(props) {
@@ -40,7 +41,7 @@ class NewEmployeeForm extends React.Component {
                 company: company,
                 email: email
               })
-        }).then(() => this.props.handleReloadData());
+        }).then(() => this.props.history.push("/"));
     }
 
     activeness(event, val) {
@@ -81,4 +82,4 @@ class NewEmployeeForm extends React.Component {
         );
     }
 }
-export default NewEmployeeForm;
+export default withRouter(NewEmployeeForm);
